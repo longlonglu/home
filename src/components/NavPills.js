@@ -5,9 +5,8 @@ import SwipeableViews from "react-swipeable-views"
 import { makeStyles } from "@material-ui/core/styles"
 import Tabs from "@material-ui/core/Tabs"
 import Tab from "@material-ui/core/Tab"
-import GridContainer from "../components/Grid/GridContainer"
-import GridItem from "../components/Grid/GridItem"
-import styles from "assets/jss/material-kit-react/components/navPillsStyle.js"
+import Grid from "@material-ui/core/Grid"
+import styles from "assets/styles/components/navPillsStyle"
 
 const useStyles = makeStyles(styles)
 
@@ -80,10 +79,14 @@ export default function NavPills(props) {
     </div>
   )
   return horizontal !== undefined ? (
-    <GridContainer>
-      <GridItem {...horizontal.tabsGrid}>{tabButtons}</GridItem>
-      <GridItem {...horizontal.contentGrid}>{tabContent}</GridItem>
-    </GridContainer>
+    <Grid container>
+      <Grid item {...horizontal.tabsGrid}>
+        {tabButtons}
+      </Grid>
+      <Grid item {...horizontal.contentGrid}>
+        {tabContent}
+      </Grid>
+    </Grid>
   ) : (
     <div>
       {tabButtons}
@@ -107,14 +110,7 @@ NavPills.propTypes = {
       tabContent: PropTypes.node,
     })
   ).isRequired,
-  color: PropTypes.oneOf([
-    "primary",
-    "warning",
-    "danger",
-    "success",
-    "info",
-    "rose",
-  ]),
+  color: "primary",
   direction: PropTypes.string,
   horizontal: PropTypes.shape({
     tabsGrid: PropTypes.object,

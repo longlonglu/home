@@ -1,52 +1,89 @@
-import React, { useEffect } from "react"
-import classNames from "classnames"
+import React from "react"
 import { makeStyles } from "@material-ui/core/styles"
 import Header from "../Header/Header"
-import GridContainer from "components/Grid/GridContainer.js"
-import GridItem from "components/Grid/GridItem.js"
+import Grid from "@material-ui/core/Grid"
 import HeaderLinks from "../Header/HeaderLinks.js"
 import Parallax from "components/Parallax.js"
-import Divider from "@material-ui/core/Divider"
-import styles from "assets/jss/material-kit-react/views/enrollment.js"
-import WorkSection from "./WorkSection.js"
-import bottonRightNav from "assets/jss/buttonRightNav"
-import cover from "../../store/ProgramStore/store"
+import styles from "assets/styles/views/project"
+import NavPills from "components/NavPills.js"
+import Camera from "@material-ui/icons/Camera"
+import Palette from "@material-ui/icons/Palette"
+import store from "../../assets/store/ProjectStore/store"
+import Three from "../Home/ThreeTest"
 
-const dashboardRoutes = []
 const useStyles = makeStyles(styles)
-const bottonRightNavSytles = makeStyles(bottonRightNav)
 export default function Contact(props) {
   const classes = useStyles()
-  const bottonRightNavClasses = bottonRightNavSytles()
   const { ...rest } = props
   return (
     <div>
       <Header
         color="transparent"
-        routes={dashboardRoutes}
-        brand="Some Preschool"
         rightLinks={<HeaderLinks />}
         fixed
         changeColorOnScroll={{
-          height: 400,
-          color: "littleWhite",
+          height: 200,
+          color: "white",
         }}
         {...rest}
       />
-      <Parallax filter image={cover.img}>
+      <Parallax image={store.cover}>
         <div className={classes.container}>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-              <h1 className={classes.title}>{cover.title}</h1>
-              <h4>{cover.description}</h4>
-              <br />
-            </GridItem>
-          </GridContainer>
+          <Grid container>
+            <Grid item xs={12} sm={12} md={6}>
+              <Three />
+              <h1 className={classes.title}>{store.title}</h1>
+              <h4>{store.description}</h4>
+            </Grid>
+          </Grid>
         </div>
       </Parallax>
-      <div className={classNames(classes.main, classes.mainRaised)}>
+      <div className={classes.mainRaised}>
         <div className={classes.container}>
-          <WorkSection />
+          <Grid container justify="center">
+            <Grid item xs={12} sm={12} md={8}>
+              <NavPills
+                alignCenter
+                color="primary"
+                tabs={[
+                  {
+                    tabButton: "Demo",
+                    tabIcon: Camera,
+                    tabContent: (
+                      <Grid container justify="center">
+                        <Grid item xs={12} sm={12} md={4}>
+                          <a href={store.leetcodeProjctLink}>
+                            <img
+                              alt="..."
+                              src={store.leetcodeProjct}
+                              className={classes.imgGallery}
+                            />
+                          </a>
+                        </Grid>
+                      </Grid>
+                    ),
+                  },
+                  {
+                    tabButton: "Source Code",
+                    tabIcon: Palette,
+                    tabContent: (
+                      <Grid container justify="center">
+                        <Grid item xs={12} sm={12} md={4}>
+                          <a href={store.leetcodeProjectSourceCodeLink}>
+                            <img
+                              alt="..."
+                              src={store.leetcodeProjct}
+                              className={classes.imgGallery}
+                            />
+                          </a>
+                        </Grid>
+                      </Grid>
+                    ),
+                  },
+                ]}
+              />
+            </Grid>
+          </Grid>
         </div>
       </div>
     </div>
